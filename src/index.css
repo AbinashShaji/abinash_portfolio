@@ -1,0 +1,28 @@
+@import "tailwindcss";
+
+@theme {
+  --color-red: #C0261E;
+  --color-black: #111111;
+  --color-cream: #EFE6DA;
+  --font-display: "Anton", sans-serif;
+  --font-sans: "Inter", sans-serif;
+}
+
+@layer base {
+  html, body {
+    @apply bg-cream text-black font-sans scroll-smooth;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+@layer utilities {
+  .text-stroke {
+    -webkit-text-stroke: 1px var(--color-cream);
+    color: transparent;
+  }
+  .text-stroke-black {
+    -webkit-text-stroke: 1px var(--color-black);
+    color: transparent;
+  }
+}
