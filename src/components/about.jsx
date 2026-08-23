@@ -16,6 +16,7 @@
  * - 'lucide-react': Provides the small icons (User, MapPin, etc.) used next to personal details.
  */
 
+import TypewriterLoop from './ui/typewriter-loop';
 import { motion } from 'framer-motion';
 import { User, MapPin, GraduationCap, Asterisk, Languages, ArrowRight } from 'lucide-react';
 
@@ -41,9 +42,14 @@ export default function About() {
             transition={{ duration: 0.8 }}
             className="mb-12 relative z-10"
           >
-            <h2 className="font-display text-4xl md:text-5xl uppercase text-black tracking-tighter">
-              <span className="border-b-4 border-black pb-1">ABOUT</span> <span className="text-red">ME</span>
-            </h2>
+            {/* The new TypewriterLoop component customized for the About section */}
+            <TypewriterLoop 
+              LeadText="ABOUT"
+              morphingText={["ME"]}
+              transition={{ duration: 0.8, ease: "easeInOut", repeat: Infinity, repeatType: "reverse", repeatDelay: 1 }}
+              className="font-display text-4xl md:text-5xl uppercase tracking-tighter flex-nowrap items-baseline text-black"
+              LeadTextClassName="border-b-4 border-black pb-1 mr-2"
+            />
           </motion.div>
 
           {/* Grid Layout: Splits the remaining space into 12 columns on medium screens and larger */}

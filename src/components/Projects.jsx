@@ -13,6 +13,7 @@
  */
 
 import { useRef, useState } from 'react';
+import TypewriterLoop from './ui/typewriter-loop';
 import { motion } from 'framer-motion';
 
 // Array containing all project data. This keeps the JSX code below clean and easy to update.
@@ -101,9 +102,14 @@ export default function Projects() {
           className="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6"
         >
           <div>
-            <h2 className="font-display text-5xl md:text-6xl uppercase tracking-tighter">
-              SELECTED <span className="text-red">PROJECTS</span>
-            </h2>
+            {/* TypewriterLoop for looping reveal/hide animation on the heading */}
+            <TypewriterLoop 
+              LeadText="SELECTED"
+              morphingText={["PROJECTS"]}
+              transition={{ duration: 0.8, ease: "easeInOut", repeat: Infinity, repeatType: "reverse", repeatDelay: 1 }}
+              className="font-display text-5xl md:text-6xl uppercase tracking-tighter flex-wrap md:flex-nowrap items-baseline text-black"
+              LeadTextClassName="mr-2"
+            />
           </div>
           <a href="https://github.com/AbinashShaji" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 font-mono text-sm tracking-widest hover:text-red transition-colors group text-black uppercase pb-1">
             VIEW ALL PROJECTS <span className="group-hover:translate-x-1 transition-transform inline-block">→</span>

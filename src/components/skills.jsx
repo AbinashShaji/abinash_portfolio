@@ -17,6 +17,7 @@
  * - 'ScrollVelocityRow': A custom UI component (located in the ui folder) that makes the marquee scroll.
  */
 
+import TypewriterLoop from './ui/typewriter-loop';
 import { motion } from 'framer-motion';
 import { Code2, Monitor, Server, Database, Settings, Globe } from 'lucide-react';
 import { ScrollVelocityRow } from './ui/scroll-velocity-text';
@@ -93,9 +94,14 @@ export default function Skills() {
           transition={{ duration: 0.6 }}
           className="mb-12 flex justify-center md:justify-start"
         >
-          <h2 className="font-display text-4xl md:text-5xl uppercase text-black tracking-tighter">
-            <span className="border-b-4 border-black pb-1">SKILLS</span> & <span className="text-red">TOOLS</span>
-          </h2>
+          {/* TypewriterLoop replacing static heading for looping animation */}
+          <TypewriterLoop 
+            LeadText={<><span className="border-b-4 border-black pb-1">SKILLS</span> &</>}
+            morphingText={["TOOLS"]}
+            transition={{ duration: 0.8, ease: "easeInOut", repeat: Infinity, repeatType: "reverse", repeatDelay: 1 }}
+            className="font-display text-4xl md:text-5xl uppercase tracking-tighter flex-wrap md:flex-nowrap items-baseline text-black"
+            LeadTextClassName="mr-2"
+          />
         </motion.div>
 
         {/* The Grid containing the 6 skill categories */}

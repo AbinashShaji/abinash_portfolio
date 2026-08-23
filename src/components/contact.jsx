@@ -18,6 +18,7 @@
  */
 
 import { useState } from 'react';
+import TypewriterLoop from './ui/typewriter-loop';
 import { motion } from 'framer-motion';
 // Import the form management hooks
 import { useForm } from 'react-hook-form';
@@ -94,9 +95,14 @@ export default function Contact() {
           transition={{ duration: 0.8 }}
           className="mb-16"
         >
-          <h2 className="font-display text-5xl md:text-7xl uppercase text-black tracking-tighter">
-            LET'S <span className="text-red">CONNECT</span>
-          </h2>
+          {/* Reveal/hide loop animation for the CONNECT heading */}
+          <TypewriterLoop 
+            LeadText="LET'S"
+            morphingText={["CONNECT"]}
+            transition={{ duration: 0.8, ease: "easeInOut", repeat: Infinity, repeatType: "reverse", repeatDelay: 1 }}
+            className="font-display text-5xl md:text-7xl uppercase tracking-tighter flex-wrap md:flex-nowrap items-baseline text-black"
+            LeadTextClassName="mr-2"
+          />
         </motion.div>
 
         {/* 2-Column Grid for large screens */}

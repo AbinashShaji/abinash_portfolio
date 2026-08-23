@@ -12,6 +12,7 @@
  * Rendered in `App.jsx`, immediately below the About section.
  */
 
+import TypewriterLoop from './ui/typewriter-loop';
 import { motion } from 'framer-motion';
 // Importing icons from lucide-react. We will use these dynamically inside our array below.
 import { Code, LayoutTemplate, Server, Database, Wallet, BarChart } from 'lucide-react';
@@ -72,9 +73,14 @@ export default function Services() {
           className="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6"
         >
           <div>
-            <h2 className="font-display text-4xl md:text-5xl uppercase text-black tracking-tighter">
-              <span className="border-b-4 border-black pb-1">SERVICES</span> I <span className="text-red">PROVIDE</span>
-            </h2>
+            {/* Replaced standard h2 with TypewriterLoop for looping reveal/hide animation */}
+            <TypewriterLoop 
+              LeadText={<><span className="border-b-4 border-black pb-1">SERVICES</span> I</>}
+              morphingText={["PROVIDE"]}
+              transition={{ duration: 0.8, ease: "easeInOut", repeat: Infinity, repeatType: "reverse", repeatDelay: 1 }}
+              className="font-display text-4xl md:text-5xl uppercase tracking-tighter flex-wrap md:flex-nowrap items-baseline text-black"
+              LeadTextClassName="mr-2"
+            />
           </div>
           <a href="#services" className="inline-flex items-center gap-2 font-mono text-sm tracking-widest hover:text-red transition-colors group text-black uppercase pb-1">
             EXPLORE ALL SERVICES <span className="group-hover:translate-x-1 transition-transform inline-block">→</span>

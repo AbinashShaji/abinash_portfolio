@@ -13,6 +13,7 @@
  * Rendered in `App.jsx`, immediately below the Skills section.
  */
 
+import TypewriterLoop from './ui/typewriter-loop';
 import { motion, useMotionValue, useTransform, animate, useInView } from 'framer-motion';
 import { useEffect, useRef } from 'react';
 
@@ -71,9 +72,14 @@ export default function Journey() {
           transition={{ duration: 0.6 }}
           className="mb-16 md:mb-24 flex items-center gap-4 xl:pl-16"
         >
-          <h2 className="font-display text-4xl md:text-5xl uppercase text-black tracking-tighter">
-            MY <span className="text-red">JOURNEY</span>
-          </h2>
+          {/* Loop animation for the JOURNEY heading */}
+          <TypewriterLoop 
+            LeadText="MY"
+            morphingText={["JOURNEY"]}
+            transition={{ duration: 0.8, ease: "easeInOut", repeat: Infinity, repeatType: "reverse", repeatDelay: 1 }}
+            className="font-display text-4xl md:text-5xl uppercase tracking-tighter flex-wrap md:flex-nowrap items-baseline text-black"
+            LeadTextClassName="mr-2"
+          />
         </motion.div>
 
         {/* 
