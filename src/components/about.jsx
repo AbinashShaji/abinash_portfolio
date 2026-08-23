@@ -192,20 +192,61 @@ export default function About() {
           <div className="absolute bottom-0 left-0 w-6 h-6 md:w-8 md:h-8 border-l-[2px] border-b-[2px] border-red -translate-x-1/2 translate-y-1/2"></div>
           <div className="absolute bottom-0 right-0 w-6 h-6 md:w-8 md:h-8 border-r-[2px] border-b-[2px] border-red translate-x-1/2 translate-y-1/2"></div>
 
-          {/* The main text of the quote, animating upwards slightly when scrolled into view */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="text-center"
+          {/* 
+            The main text of the quote, animating word-by-word when scrolled into view.
+            We use staggerChildren on the parent <motion.p> so that each word (child) 
+            animates one after another with a slight delay, creating a typewriter effect.
+          */}
+          <motion.p
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-50px" }}
+            variants={{
+              hidden: { opacity: 0 },
+              visible: {
+                opacity: 1,
+                // delayChildren: wait before starting the first child's animation
+                // staggerChildren: time delay between each consecutive child's animation
+                transition: { staggerChildren: 0.12, delayChildren: 0.2 }
+              }
+            }}
+            className="font-mono text-base md:text-xl lg:text-3xl uppercase tracking-[0.2em] leading-loose text-cream text-center"
           >
-            <p className="font-mono text-base md:text-xl lg:text-3xl uppercase tracking-[0.2em] leading-loose text-cream">
-              CODE IS NOT JUST LOGIC,<br />
-              IT'S A CRAFT OF SOLVING REAL PROBLEMS<br />
-              WITH <span className="text-red font-bold">CREATIVITY</span> AND <span className="text-red font-bold">PERSISTENCE</span>.
-            </p>
-          </motion.div>
+            {/* Line 1: Split into an array of words and map to individual animated spans */}
+            {"CODE IS NOT JUST LOGIC,".split(" ").map((word, i, arr) => (
+              <span key={`l1-${i}`} className="inline-block whitespace-pre">
+                <motion.span variants={{ hidden: { opacity: 0, y: 10 }, visible: { opacity: 1, y: 0 } }} className="inline-block">{word}</motion.span>
+                {i !== arr.length - 1 && " "}
+              </span>
+            ))}
+            <br />
+
+            {/* Line 2: Split and animated exactly like the first line */}
+            {"IT'S A CRAFT OF SOLVING REAL PROBLEMS".split(" ").map((word, i, arr) => (
+              <span key={`l2-${i}`} className="inline-block whitespace-pre">
+                <motion.span variants={{ hidden: { opacity: 0, y: 10 }, visible: { opacity: 1, y: 0 } }} className="inline-block">{word}</motion.span>
+                {i !== arr.length - 1 && " "}
+              </span>
+            ))}
+            <br />
+            
+            {/* 
+              Line 3: Manually broken down because it contains specific styles (red text).
+              Each word still gets its own <motion.span> with the same variants, so the stagger continues smoothly.
+            */}
+            <span className="inline-block whitespace-pre">
+              <motion.span variants={{ hidden: { opacity: 0, y: 10 }, visible: { opacity: 1, y: 0 } }} className="inline-block">WITH</motion.span>{" "}
+            </span>
+            <span className="inline-block whitespace-pre">
+              <motion.span variants={{ hidden: { opacity: 0, y: 10 }, visible: { opacity: 1, y: 0 } }} className="inline-block text-red font-bold">CREATIVITY</motion.span>{" "}
+            </span>
+            <span className="inline-block whitespace-pre">
+              <motion.span variants={{ hidden: { opacity: 0, y: 10 }, visible: { opacity: 1, y: 0 } }} className="inline-block">AND</motion.span>{" "}
+            </span>
+            <span className="inline-block whitespace-pre">
+              <motion.span variants={{ hidden: { opacity: 0, y: 10 }, visible: { opacity: 1, y: 0 } }} className="inline-block text-red font-bold">PERSISTENCE.</motion.span>
+            </span>
+          </motion.p>
         </div>
       </div>
     </section>
