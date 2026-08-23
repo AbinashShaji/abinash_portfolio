@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useForm } from 'react-hook-form';
 import { Mail, MapPin, Link } from 'lucide-react';
+import { FaInstagram, FaLinkedin, FaGithub } from 'react-icons/fa';
 
 export default function Contact() {
   const { register, handleSubmit, formState: { errors }, reset } = useForm();
@@ -34,7 +35,7 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="bg-cream text-black py-24 md:py-32 px-4 sm:px-6 lg:px-8 relative">
+    <section id="contact" className="bg-cream paper-texture text-black py-24 md:py-32 px-4 sm:px-6 lg:px-8 relative">
       {/* Stacked Square Motif Top Right */}
       <div className="absolute top-12 right-12 hidden md:block">
         <div className="relative w-8 h-8">
@@ -71,7 +72,7 @@ export default function Contact() {
 
             <div className="flex flex-col gap-10 mt-4">
               <div className="flex items-start gap-6">
-                <div className="p-4 border border-black/10 bg-white"><Mail className="text-red" size={24} /></div>
+                <div className="p-4 border border-black/10 bg-white rounded-2xl shadow-sm"><Mail className="text-red" size={24} /></div>
                 <div>
                   <h3 className="font-mono text-sm tracking-widest text-black/50 mb-2 uppercase">Email</h3>
                   <a href="mailto:iam.abinashshaji@gmail.com" className="text-xl font-medium hover:text-red transition-colors inline-block">
@@ -81,7 +82,7 @@ export default function Contact() {
               </div>
 
               <div className="flex items-start gap-6">
-                <div className="p-4 border border-black/10 bg-white"><MapPin className="text-red" size={24} /></div>
+                <div className="p-4 border border-black/10 bg-white rounded-2xl shadow-sm"><MapPin className="text-red" size={24} /></div>
                 <div>
                   <h3 className="font-mono text-sm tracking-widest text-black/50 mb-2 uppercase">Location</h3>
                   <p className="text-xl font-medium">Kerala, India</p>
@@ -89,13 +90,19 @@ export default function Contact() {
               </div>
 
               <div className="flex items-start gap-6">
-                <div className="p-4 border border-black/10 bg-white"><Link className="text-red" size={24} /></div>
+                <div className="p-4 border border-black/10 bg-white rounded-2xl shadow-sm"><Link className="text-red" size={24} /></div>
                 <div>
                   <h3 className="font-mono text-sm tracking-widest text-black/50 mb-4 uppercase">Socials</h3>
                   <div className="flex flex-wrap items-center gap-6 text-sm font-mono tracking-wider">
-                    <a href="https://instagram.com/___abinash.__" target="_blank" rel="noreferrer" className="hover:text-red transition-colors font-medium">Instagram</a>
-                    <a href="https://www.linkedin.com/in/abinashshaji" target="_blank" rel="noreferrer" className="hover:text-red transition-colors font-medium">LinkedIn</a>
-                    <a href="https://github.com/AbinashShaji" target="_blank" rel="noreferrer" className="hover:text-red transition-colors font-medium">GitHub</a>
+                    <a href="https://instagram.com/___abinash.__" target="_blank" rel="noreferrer" className="hover:text-red transition-colors font-medium" aria-label="Instagram">
+                      <FaInstagram size={24} />
+                    </a>
+                    <a href="https://www.linkedin.com/in/abinashshaji" target="_blank" rel="noreferrer" className="hover:text-red transition-colors font-medium" aria-label="LinkedIn">
+                      <FaLinkedin size={24} />
+                    </a>
+                    <a href="https://github.com/AbinashShaji" target="_blank" rel="noreferrer" className="hover:text-red transition-colors font-medium" aria-label="GitHub">
+                      <FaGithub size={24} />
+                    </a>
                   </div>
                 </div>
               </div>

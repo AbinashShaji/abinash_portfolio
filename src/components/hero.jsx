@@ -5,13 +5,15 @@ export default function Hero() {
     return (
         <section id="home" className="relative w-full h-screen overflow-hidden bg-red flex flex-col justify-between">
 
-            {/* Background Image */}
-            <div className="absolute inset-0 z-0">
+            {/* Background Image & Texture */}
+            <div className="absolute inset-0 z-0 bg-red">
                 <img
                     src="/images/hero/portfolio.png"
                     alt="Hero background with Abinash Shaji"
                     className="w-full h-full object-cover object-center"
                 />
+                {/* Paper texture overlay to match the footer */}
+                <div className="absolute inset-0 paper-texture pointer-events-none opacity-100 mix-blend-multiply"></div>
             </div>
 
             {/* Top Overlay Elements */}
