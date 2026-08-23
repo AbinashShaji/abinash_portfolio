@@ -71,69 +71,93 @@ const ImageMagnifier = ({ src, alt }) => {
 
 export default function Projects() {
   return (
-    <section id="projects" className="bg-cream text-black py-24 md:py-32 px-4 sm:px-6 lg:px-8 border-t border-black/10">
-      <div className="max-w-7xl mx-auto">
+    <section id="projects" className="bg-cream paper-texture text-black py-24 md:py-32 px-4 sm:px-6 lg:px-8 border-t border-black/10">
+      <div className="max-w-[1500px] mx-auto">
         
         <motion.div 
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.8 }}
-          className="mb-16 flex flex-col md:flex-row md:items-end justify-between gap-6"
+          className="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6"
         >
           <div>
-            <h2 className="font-display text-5xl md:text-7xl uppercase tracking-tighter">
+            <h2 className="font-display text-5xl md:text-6xl uppercase tracking-tighter">
               SELECTED <span className="text-red">PROJECTS</span>
             </h2>
           </div>
-          <a href="#home" className="inline-flex items-center gap-2 font-mono text-sm tracking-widest hover:text-red transition-colors group pb-2 border-b border-transparent hover:border-red">
-            VIEW ALL PROJECTS <span className="group-hover:translate-x-1 transition-transform">→</span>
+          <a href="#home" className="inline-flex items-center gap-2 font-mono text-sm tracking-widest hover:text-red transition-colors group text-black uppercase pb-1">
+            VIEW ALL PROJECTS <span className="group-hover:translate-x-1 transition-transform inline-block">→</span>
           </a>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {projects.map((project, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.6, delay: index * 0.2 }}
-              className="flex flex-col h-full bg-[#111] text-white border border-black/10 relative p-6 group hover:border-black/30 transition-colors"
-            >
-              {/* Red Badge */}
-              <div className="absolute top-0 right-0 bg-red text-white font-mono text-sm tracking-widest px-4 py-1 z-10 -translate-y-1/2 translate-x-4">
-                {project.num}
-              </div>
-
-              <div className="mb-6">
-                <div className="font-mono text-xs tracking-widest text-red mb-2 uppercase">{project.tag}</div>
-                <h3 className="font-display text-3xl uppercase tracking-tight">
-                  {project.title}
-                </h3>
-              </div>
-
-              <ImageMagnifier src={project.image} alt={project.title} />
-              
-              <div className="flex-grow flex flex-col">
-                <p className="text-sm text-white/70 mb-6 leading-relaxed flex-grow">
-                  {project.description}
-                </p>
-                <div className="font-mono text-xs text-white/60 mb-6 border-l border-white/20 pl-3 py-1">
-                  {project.stack}
+        <div className="relative">
+          {/* Decorative red block behind the last card */}
+          <div className="absolute -bottom-8 -right-8 w-48 h-48 bg-red hidden xl:block z-0"></div>
+          
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-8 relative z-10">
+            {projects.map((project, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.6, delay: index * 0.2 }}
+                className="bg-[#111111] text-white flex flex-row group h-[480px] hover:-translate-y-2 transition-transform duration-300"
+              >
+                {/* Left Column */}
+                <div className="w-[35%] flex flex-col border-r border-white/5 bg-black">
+                  <div className="bg-red text-white font-display text-4xl flex items-center justify-center aspect-square shrink-0">
+                    {project.num}
+                  </div>
+                  <div className="flex-grow relative overflow-hidden">
+                     <div className="absolute inset-0 bg-red mix-blend-multiply opacity-20 z-10 group-hover:opacity-0 transition-opacity duration-500"></div>
+                     <img 
+                       src={project.image} 
+                       alt={project.title} 
+                       className="absolute inset-0 w-full h-full object-cover grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500" 
+                       onError={(e) => {
+                         e.target.onerror = null;
+                         e.target.src = `https://placehold.co/400x800/222/EFE6DA?text=${project.title.replace(/\s+/g, '+')}`;
+                       }}
+                     />
+                  </div>
                 </div>
-                
-                <a 
-                  href={project.link}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center gap-2 font-mono text-xs font-bold tracking-widest text-white hover:text-red transition-colors group/link uppercase mt-auto"
-                >
-                  VIEW PROJECT <span className="group-hover/link:translate-x-1 transition-transform">→</span>
-                </a>
-              </div>
-            </motion.div>
-          ))}
+
+                {/* Right Column */}
+                <div className="w-[65%] flex flex-col p-6 lg:p-8">
+                  <h3 className="font-display text-2xl lg:text-3xl uppercase tracking-tight mb-1 text-white leading-none">
+                    {project.title}
+                  </h3>
+                  <div className="font-mono text-[10px] tracking-widest text-cream/50 mb-6 uppercase shrink-0">
+                    {project.tag}
+                  </div>
+                  
+                  <p className="text-xs font-mono text-cream/70 mb-4 leading-relaxed line-clamp-6">
+                    {project.description}
+                  </p>
+
+                  <div className="mt-auto pt-4">
+                    <div className="font-mono text-[10px] text-cream/40 mb-2 uppercase tracking-widest">
+                      Tech Stack
+                    </div>
+                    <div className="font-mono text-[11px] lg:text-xs text-cream/70 mb-8 leading-relaxed line-clamp-3">
+                      {project.stack}
+                    </div>
+                    
+                    <a 
+                      href={project.link}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex items-center gap-2 font-mono text-xs font-bold tracking-widest text-white hover:text-red transition-colors group/link uppercase"
+                    >
+                      VIEW PROJECT <span className="group-hover/link:translate-x-1 transition-transform inline-block">→</span>
+                    </a>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
 
       </div>

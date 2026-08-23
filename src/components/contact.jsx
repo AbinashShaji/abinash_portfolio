@@ -11,14 +11,14 @@ export default function Contact() {
   const onSubmit = async (data) => {
     setIsSubmitting(true);
     const formEndpoint = 'https://formspree.io/f/placeholder';
-    
+
     try {
       const response = await fetch(formEndpoint, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)
       });
-      
+
       if (response.ok) {
         setSubmitStatus('success');
         reset();
@@ -44,8 +44,8 @@ export default function Contact() {
       </div>
 
       <div className="max-w-7xl mx-auto relative z-10">
-        
-        <motion.div 
+
+        <motion.div
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
@@ -68,7 +68,7 @@ export default function Contact() {
             <p className="text-2xl md:text-3xl leading-relaxed tracking-tight">
               I'm always open to discussing new projects, creative ideas, or opportunities to be part of your visions.
             </p>
-            
+
             <div className="flex flex-col gap-10 mt-4">
               <div className="flex items-start gap-6">
                 <div className="p-4 border border-black/10 bg-white"><Mail className="text-red" size={24} /></div>
@@ -79,7 +79,7 @@ export default function Contact() {
                   </a>
                 </div>
               </div>
-              
+
               <div className="flex items-start gap-6">
                 <div className="p-4 border border-black/10 bg-white"><MapPin className="text-red" size={24} /></div>
                 <div>
@@ -87,13 +87,13 @@ export default function Contact() {
                   <p className="text-xl font-medium">Kerala, India</p>
                 </div>
               </div>
-              
+
               <div className="flex items-start gap-6">
                 <div className="p-4 border border-black/10 bg-white"><Link className="text-red" size={24} /></div>
                 <div>
                   <h3 className="font-mono text-sm tracking-widest text-black/50 mb-4 uppercase">Socials</h3>
                   <div className="flex flex-wrap items-center gap-6 text-sm font-mono tracking-wider">
-                    <a href="https://instagram.com/__abinash.__" target="_blank" rel="noreferrer" className="hover:text-red transition-colors font-medium">Instagram</a>
+                    <a href="https://instagram.com/___abinash.__" target="_blank" rel="noreferrer" className="hover:text-red transition-colors font-medium">Instagram</a>
                     <a href="https://www.linkedin.com/in/abinashshaji" target="_blank" rel="noreferrer" className="hover:text-red transition-colors font-medium">LinkedIn</a>
                     <a href="https://github.com/AbinashShaji" target="_blank" rel="noreferrer" className="hover:text-red transition-colors font-medium">GitHub</a>
                   </div>
@@ -115,7 +115,7 @@ export default function Contact() {
             <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-8">
               <div className="flex flex-col gap-2">
                 <label htmlFor="name" className="font-mono text-sm tracking-widest text-white/50 uppercase">Your Name</label>
-                <input 
+                <input
                   id="name"
                   {...register("name", { required: "Name is required" })}
                   className="bg-transparent border-b border-white/20 py-3 text-lg focus:outline-none focus:border-red transition-colors w-full"
@@ -125,10 +125,10 @@ export default function Contact() {
 
               <div className="flex flex-col gap-2">
                 <label htmlFor="email" className="font-mono text-sm tracking-widest text-white/50 uppercase">Your Email</label>
-                <input 
+                <input
                   id="email"
                   type="email"
-                  {...register("email", { 
+                  {...register("email", {
                     required: "Email is required",
                     pattern: {
                       value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
@@ -142,7 +142,7 @@ export default function Contact() {
 
               <div className="flex flex-col gap-2">
                 <label htmlFor="subject" className="font-mono text-sm tracking-widest text-white/50 uppercase">Your Subject</label>
-                <input 
+                <input
                   id="subject"
                   {...register("subject", { required: "Subject is required" })}
                   className="bg-transparent border-b border-white/20 py-3 text-lg focus:outline-none focus:border-red transition-colors w-full"
@@ -152,7 +152,7 @@ export default function Contact() {
 
               <div className="flex flex-col gap-2 mb-4">
                 <label htmlFor="message" className="font-mono text-sm tracking-widest text-white/50 uppercase">Your Message</label>
-                <textarea 
+                <textarea
                   id="message"
                   rows="4"
                   {...register("message", { required: "Message is required" })}
@@ -161,14 +161,14 @@ export default function Contact() {
                 {errors.message && <span className="text-red text-sm">{errors.message.message}</span>}
               </div>
 
-              <button 
-                type="submit" 
+              <button
+                type="submit"
                 disabled={isSubmitting}
                 className="bg-white text-black font-mono tracking-widest py-4 px-8 uppercase text-sm font-bold hover:bg-red hover:text-white transition-colors self-start disabled:opacity-50 flex items-center gap-2 group"
               >
                 {isSubmitting ? 'SENDING...' : 'SEND MESSAGE'} <span className="group-hover:translate-x-1 transition-transform">→</span>
               </button>
-              
+
               {submitStatus === 'success' && (
                 <p className="text-green-500 font-mono text-sm mt-2">Message sent successfully!</p>
               )}

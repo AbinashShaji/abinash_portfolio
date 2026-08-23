@@ -45,7 +45,7 @@ export default function Hero() {
                 {/* Socials & Contact */}
                 <div className="flex flex-col sm:flex-row items-end sm:items-center gap-6 md:gap-8 pointer-events-auto ml-auto">
                     <div className="flex flex-wrap justify-end items-center gap-4 md:gap-6 text-cream">
-                        <a href="https://instagram.com/__abinash.__" target="_blank" rel="noreferrer" className="hover:text-white transition-colors" aria-label="Instagram">
+                        <a href="https://instagram.com/___abinash.__" target="_blank" rel="noreferrer" className="hover:text-white transition-colors" aria-label="Instagram">
                             <FaInstagram size={20} />
                         </a>
                         <a href="https://www.linkedin.com/in/abinashshaji" target="_blank" rel="noreferrer" className="hover:text-white transition-colors" aria-label="LinkedIn">
