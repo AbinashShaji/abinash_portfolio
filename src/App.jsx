@@ -17,14 +17,14 @@ import React from 'react';
 
 // Import all the individual building blocks (components) that make up our single-page website
 import Navigation from './components/Navigation';
-import Hero from './components/Hero';
-import About from './components/About';
-import Services from './components/Services';
+import Hero from './components/hero';
+import About from './components/about';
+import Services from './components/services';
 import Projects from './components/Projects';
-import Skills from './components/Skills';
-import Journey from './components/Journey';
-import Contact from './components/Contact';
-import Footer from './components/Footer';
+import Skills from './components/skills';
+import Journey from './components/journey';
+import Contact from './components/contact';
+import Footer from './components/footer';
 
 // Define the App component function
 function App() {
