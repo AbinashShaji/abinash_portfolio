@@ -1,6 +1,21 @@
+/**
+ * PROJECTS COMPONENT (Projects.jsx)
+ * 
+ * What this file is:
+ * This component showcases the portfolio's main work/projects.
+ * 
+ * What it's responsible for:
+ * It loops through a list of projects and renders a visual card for each one,
+ * containing the project title, description, tech stack, and a hover-revealed image.
+ * 
+ * Where it's used:
+ * Rendered in `App.jsx`, immediately below the Services section.
+ */
+
 import { useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 
+// Array containing all project data. This keeps the JSX code below clean and easy to update.
 const projects = [
   {
     num: "01",
@@ -31,6 +46,9 @@ const projects = [
   }
 ];
 
+// NOTE: This ImageMagnifier component is an unused piece of code in the current layout.
+// It looks like it was designed to let a user hover over an image to zoom in, 
+// but it is currently not being rendered anywhere inside the main Projects component below.
 const ImageMagnifier = ({ src, alt }) => {
   const containerRef = useRef(null);
   const [position, setPosition] = useState({ x: '50%', y: '50%' });
@@ -74,6 +92,7 @@ export default function Projects() {
     <section id="projects" className="bg-cream paper-texture text-black py-24 md:py-32 px-4 sm:px-6 lg:px-8 border-t border-black/10">
       <div className="max-w-[1500px] mx-auto">
         
+        {/* Section Header */}
         <motion.div 
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -92,30 +111,43 @@ export default function Projects() {
         </motion.div>
 
         <div className="relative">
-          {/* Decorative red block behind the last card */}
+          {/* Decorative solid red square tucked behind the final project card on large screens */}
           <div className="absolute -bottom-8 -right-8 w-48 h-48 bg-red hidden xl:block z-0"></div>
           
+          {/* CSS Grid for the project cards */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-8 relative z-10">
+            
+            {/* Loop through the projects array */}
             {projects.map((project, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 0.6, delay: index * 0.2 }}
+                transition={{ duration: 0.6, delay: index * 0.2 }} // Staggered animation using the array index
                 className="bg-[#111111] text-white flex flex-row group h-[480px] hover:-translate-y-2 transition-transform duration-300"
               >
-                {/* Left Column */}
+                
+                {/* LEFT COLUMN OF THE CARD: Displays the large number and the hover image */}
                 <div className="w-[35%] flex flex-col border-r border-white/5 bg-black">
+                  
+                  {/* The big project number (01, 02, etc.) */}
                   <div className="bg-red text-white font-display text-4xl flex items-center justify-center aspect-square shrink-0">
                     {project.num}
                   </div>
+                  
+                  {/* The image block */}
                   <div className="flex-grow relative overflow-hidden">
+                     {/* This red overlay fades out when you hover over the card ('group-hover:opacity-0') */}
                      <div className="absolute inset-0 bg-red mix-blend-multiply opacity-20 z-10 group-hover:opacity-0 transition-opacity duration-500"></div>
+                     
                      <img 
                        src={project.image} 
                        alt={project.title} 
+                       // The image starts out grayscale and dim, but turns fully colored when hovered
                        className="absolute inset-0 w-full h-full object-cover grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500" 
+                       
+                       // A clever fallback: if the real image URL fails to load, it generates a placeholder image on the fly!
                        onError={(e) => {
                          e.target.onerror = null;
                          e.target.src = `https://placehold.co/400x800/222/EFE6DA?text=${project.title.replace(/\s+/g, '+')}`;
@@ -124,8 +156,10 @@ export default function Projects() {
                   </div>
                 </div>
 
-                {/* Right Column */}
+                {/* RIGHT COLUMN OF THE CARD: Displays the text details */}
                 <div className="w-[65%] flex flex-col p-6 lg:p-8">
+                  
+                  {/* Title and Tag */}
                   <h3 className="font-display text-2xl lg:text-3xl uppercase tracking-tight mb-1 text-white leading-none">
                     {project.title}
                   </h3>
@@ -133,10 +167,12 @@ export default function Projects() {
                     {project.tag}
                   </div>
                   
+                  {/* Description text */}
                   <p className="text-xs font-mono text-cream/70 mb-4 leading-relaxed line-clamp-6">
                     {project.description}
                   </p>
 
+                  {/* Tech stack and link (pushed to the bottom using 'mt-auto') */}
                   <div className="mt-auto pt-4">
                     <div className="font-mono text-[10px] text-cream/40 mb-2 uppercase tracking-widest">
                       Tech Stack
@@ -154,6 +190,7 @@ export default function Projects() {
                       VIEW PROJECT <span className="group-hover/link:translate-x-1 transition-transform inline-block">→</span>
                     </a>
                   </div>
+                  
                 </div>
               </motion.div>
             ))}

@@ -1,11 +1,39 @@
+/**
+ * ABOUT COMPONENT (about.jsx)
+ * 
+ * What this file is:
+ * This component renders the "About Me" section of the portfolio.
+ * 
+ * What it's responsible for:
+ * It displays a short biography, contact/location details, education history, and 
+ * interests. It also features a bold decorative quote at the bottom.
+ * 
+ * Where it's used:
+ * Rendered in `App.jsx`, immediately below the Hero section.
+ * 
+ * Dependencies:
+ * - 'framer-motion': Used to fade and slide elements in as the user scrolls down to them.
+ * - 'lucide-react': Provides the small icons (User, MapPin, etc.) used next to personal details.
+ */
+
 import { motion } from 'framer-motion';
 import { User, MapPin, GraduationCap, Asterisk, Languages, ArrowRight } from 'lucide-react';
 
 export default function About() {
   return (
+    // The main wrapper for the about section. id="about" allows the Navigation bar to scroll here.
     <section id="about" className="relative w-full">
+      {/* Top half with cream background and paper texture */}
       <div className="bg-cream paper-texture py-20 md:py-32 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
         <div className="max-w-7xl mx-auto">
+          
+          {/* 
+            Section Header 
+            <motion.div> wraps the header to animate it.
+            'initial' sets the starting state (invisible, moved down 50px).
+            'whileInView' triggers the animation when this element enters the screen.
+            'viewport={{ once: true }}' ensures it only animates the first time you scroll past it.
+          */}
           <motion.div 
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -18,9 +46,10 @@ export default function About() {
             </h2>
           </motion.div>
 
+          {/* Grid Layout: Splits the remaining space into 12 columns on medium screens and larger */}
           <div className="grid grid-cols-1 md:grid-cols-12 gap-12 lg:gap-20">
             
-            {/* Left Column: Bio */}
+            {/* LEFT COLUMN: The biography text (takes up 6 out of 12 columns) */}
             <div className="md:col-span-6 flex flex-col gap-8 relative z-10 md:border-r border-black/15 md:pr-12 lg:pr-20">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -44,16 +73,17 @@ export default function About() {
                 transition={{ duration: 0.6, delay: 0.2 }}
                 className="mt-2"
               >
+                {/* Link to the journey section */}
                 <a href="#journey" className="inline-flex items-center gap-2 font-mono text-sm tracking-widest transition-colors group uppercase font-bold text-black hover:text-red">
                   MORE ABOUT ME <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
                 </a>
               </motion.div>
             </div>
 
-            {/* Right Column: Details */}
+            {/* RIGHT COLUMN: The quick facts (takes up the other 6 columns) */}
             <div className="md:col-span-6 flex flex-col gap-6 relative z-10 pt-2">
               
-              {/* Decorative Graphic / Image Placeholder */}
+              {/* Decorative Graphic: This is just visual flair (a black and red box with a plus sign) */}
               <div className="absolute top-0 right-0 hidden lg:block z-0 pointer-events-none translate-x-16 -translate-y-4 opacity-80">
                 <div className="relative w-64 h-64">
                   <div className="absolute bottom-0 left-0 w-56 h-56 bg-black"></div>
@@ -63,6 +93,7 @@ export default function About() {
                 </div>
               </div>
 
+              {/* Personal Detail: Name */}
               <motion.div
                 initial={{ opacity: 0, x: 20 }}
                 whileInView={{ opacity: 1, x: 0 }}
@@ -77,6 +108,7 @@ export default function About() {
                 </div>
               </motion.div>
 
+              {/* Personal Detail: Location */}
               <motion.div
                 initial={{ opacity: 0, x: 20 }}
                 whileInView={{ opacity: 1, x: 0 }}
@@ -91,6 +123,7 @@ export default function About() {
                 </div>
               </motion.div>
 
+              {/* Personal Detail: Education */}
               <motion.div
                 initial={{ opacity: 0, x: 20 }}
                 whileInView={{ opacity: 1, x: 0 }}
@@ -106,6 +139,7 @@ export default function About() {
                 </div>
               </motion.div>
               
+              {/* Personal Detail: Interests */}
               <motion.div
                 initial={{ opacity: 0, x: 20 }}
                 whileInView={{ opacity: 1, x: 0 }}
@@ -120,6 +154,7 @@ export default function About() {
                 </div>
               </motion.div>
               
+              {/* Personal Detail: Languages */}
               <motion.div
                 initial={{ opacity: 0, x: 20 }}
                 whileInView={{ opacity: 1, x: 0 }}
@@ -139,10 +174,10 @@ export default function About() {
         </div>
       </div>
 
-      {/* Charcoal quote band */}
+      {/* BOTTOM HALF: The charcoal band with the big quote */}
       <div className="relative bg-black py-16 md:py-28 px-4 sm:px-6 lg:px-8 overflow-hidden flex items-center justify-center">
         
-        {/* Background Quotes */}
+        {/* Large background decorative quote icon (very faint SVG) */}
         <div className="absolute top-1/2 -translate-y-1/2 left-0 md:left-[10%] lg:left-[15%] w-48 md:w-72 lg:w-96 text-white/[0.03] select-none pointer-events-none z-0 mt-4 md:mt-8">
           <svg viewBox="0 0 40 40" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
              <path d="M14.9 30H4V18.1c0-4.8 1.4-8.8 4.2-12C11 2.9 14.8 1.1 19.6 0v6.1c-2.4.5-4.2 1.6-5.4 3.3-1.1 1.7-1.7 3.9-1.7 6.5h2.4V30zm19.5 0H23.5V18.1c0-4.8 1.4-8.8 4.2-12C30.5 2.9 34.3 1.1 39.1 0v6.1c-2.4.5-4.2 1.6-5.4 3.3-1.1 1.7-1.7 3.9-1.7 6.5h2.4V30z" />
@@ -150,12 +185,14 @@ export default function About() {
         </div>
         
         <div className="relative z-10 w-fit mx-auto px-8 py-6 md:px-12 md:py-8 lg:px-16 lg:py-10">
-          {/* Framing Accents */}
+          
+          {/* Four small decorative corner accents (+) around the quote */}
           <div className="absolute top-0 left-0 text-white/50 font-mono text-xl md:text-2xl leading-none -translate-x-[45%] -translate-y-1/2">+</div>
           <div className="absolute top-0 right-0 text-white/50 font-mono text-xl md:text-2xl leading-none translate-x-[45%] -translate-y-1/2">+</div>
           <div className="absolute bottom-0 left-0 w-6 h-6 md:w-8 md:h-8 border-l-[2px] border-b-[2px] border-red -translate-x-1/2 translate-y-1/2"></div>
           <div className="absolute bottom-0 right-0 w-6 h-6 md:w-8 md:h-8 border-r-[2px] border-b-[2px] border-red translate-x-1/2 translate-y-1/2"></div>
 
+          {/* The main text of the quote, animating upwards slightly when scrolled into view */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}

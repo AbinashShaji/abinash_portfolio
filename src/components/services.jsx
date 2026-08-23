@@ -1,12 +1,30 @@
+/**
+ * SERVICES COMPONENT (services.jsx)
+ * 
+ * What this file is:
+ * This component displays the "Services I Provide" section of the portfolio.
+ * 
+ * What it's responsible for:
+ * It lists out the developer's core competencies (Frontend, Backend, etc.) 
+ * using a clean grid layout of cards.
+ * 
+ * Where it's used:
+ * Rendered in `App.jsx`, immediately below the About section.
+ */
+
 import { motion } from 'framer-motion';
+// Importing icons from lucide-react. We will use these dynamically inside our array below.
 import { Code, LayoutTemplate, Server, Database, Wallet, BarChart } from 'lucide-react';
 
+// This array holds the data for every single service card.
+// Doing it this way makes the code much cleaner than writing out 6 separate HTML blocks.
+// Notice how the "icon" property is set to an actual React component imported above!
 const services = [
   {
     title: "FULL-STACK DEVELOPMENT",
     description: "Building complete web applications with modern frontend interfaces, backend systems, and APIs.",
     items: ["React & Next.js", "Node.js & Python", "RESTful APIs"],
-    icon: Code
+    icon: Code // This tells the code which icon component to draw
   },
   {
     title: "FRONTEND DEVELOPMENT",
@@ -45,6 +63,7 @@ export default function Services() {
     <section id="services" className="bg-cream paper-texture py-24 md:py-32 px-4 sm:px-6 lg:px-8 relative w-full overflow-hidden">
       <div className="max-w-[1600px] mx-auto relative z-10">
         
+        {/* Section Header */}
         <motion.div 
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -62,27 +81,44 @@ export default function Services() {
           </a>
         </motion.div>
 
+        {/* 
+          Grid Container for the cards. 
+          It automatically creates 1 column on mobile, 2 on small tablets, 3 on medium screens, and 6 on very large screens.
+        */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-4 md:gap-6">
+          
+          {/* We loop (map) through the 'services' array we defined at the top of the file */}
           {services.map((service, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
+              // By multiplying the index by 0.1, each card animates in slightly later than the one before it, creating a waterfall effect.
               transition={{ duration: 0.5, delay: index * 0.1 }}
               className="bg-[#111111] p-6 lg:p-8 flex flex-col items-center group relative overflow-hidden"
             >
+              
+              {/* Dynamic Icon Rendering */}
               <div className="mb-6">
+                {/* 
+                  Because we stored the icon component in our data object, we can render it dynamically! 
+                  It's like telling React "render whatever icon is attached to this specific service".
+                */}
                 <service.icon size={48} strokeWidth={1} className="text-red transform group-hover:scale-110 transition-transform duration-300" />
               </div>
               
-              <h3 className="font-display text-xl md:text-2xl tracking-wide text-white uppercase text-center mb-4 leading-tight">{service.title}</h3>
+              <h3 className="font-display text-xl md:text-2xl tracking-wide text-white uppercase text-center mb-4 leading-tight">
+                {service.title}
+              </h3>
               
               <p className="font-mono text-xs md:text-sm text-cream/70 leading-relaxed text-center mb-8">
                 {service.description}
               </p>
               
+              {/* Secondary Loop: Rendering the bullet points inside the card */}
               <ul className="w-full flex flex-col gap-3 mt-auto">
+                {/* Loop through the 'items' array inside this specific service */}
                 {service.items.map((item, i) => (
                   <li key={i} className="font-mono text-xs text-cream/90 flex items-start gap-2">
                     <span className="text-red/80 select-none mt-0.5">•</span> 
@@ -90,6 +126,7 @@ export default function Services() {
                   </li>
                 ))}
               </ul>
+              
             </motion.div>
           ))}
         </div>

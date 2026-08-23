@@ -1,5 +1,25 @@
+/**
+ * GLOBAL STYLES (index.css)
+ * 
+ * What this file is:
+ * This is the main CSS file for the entire project. 
+ * 
+ * What it's responsible for:
+ * 1. It imports Tailwind CSS so we can use its utility classes in our JSX files.
+ * 2. It sets up our global design theme (colors, fonts).
+ * 3. It defines custom reusable styles that we couldn't easily write using just Tailwind classes.
+ * 
+ * Where it's used:
+ * It is imported once in `main.jsx` and applies to the entire website.
+ */
+
+/* Tells Tailwind to inject its core styles, components, and utility classes here */
 @import "tailwindcss";
 
+/* 
+  @theme block allows us to define custom CSS variables that Tailwind can use.
+  For example, using `bg-red` in our React code will use the `--color-red` hex code defined here.
+*/
 @theme {
   --color-red: #C0261E;
   --color-black: #111111;
@@ -8,14 +28,23 @@
   --font-sans: "Inter", sans-serif;
 }
 
+/* 
+  @layer base targets basic HTML elements (like body, h1, a, input).
+  This is where we set the foundational styles for the page.
+*/
 @layer base {
   html, body {
+    /* @apply lets us use Tailwind classes inside a normal CSS file */
     @apply bg-cream text-black font-sans scroll-smooth;
     margin: 0;
     padding: 0;
   }
   
-  /* Fix browser autofill styling on dark backgrounds */
+  /* 
+    Fixes a common issue in web browsers (like Chrome) where autofilling a form input 
+    forces an ugly white or light-blue background. This forces the autofill background 
+    to remain our dark #111111 color and keeps the text white.
+  */
   input:-webkit-autofill,
   input:-webkit-autofill:hover, 
   input:-webkit-autofill:focus, 
@@ -30,15 +59,27 @@
   }
 }
 
+/* 
+  @layer utilities lets us define our own custom Tailwind-like classes.
+  We can add these classes to our React elements just like standard Tailwind classes.
+*/
 @layer utilities {
+  /* Creates text with a cream-colored outline and a transparent inside */
   .text-stroke {
     -webkit-text-stroke: 1px var(--color-cream);
     color: transparent;
   }
+  
+  /* Creates text with a black-colored outline and a transparent inside */
   .text-stroke-black {
     -webkit-text-stroke: 1px var(--color-black);
     color: transparent;
   }
+  
+  /* 
+    Adds a subtle, grainy paper texture effect to any element using an SVG noise filter.
+    This helps achieve the "brutalist" poster aesthetic of the website.
+  */
   .paper-texture {
     position: relative;
   }
@@ -48,7 +89,7 @@
     inset: 0;
     z-index: 0;
     opacity: 0.15;
-    pointer-events: none;
+    pointer-events: none; /* Ensures the texture doesn't block mouse clicks */
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
   }
 }

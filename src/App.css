@@ -1,3 +1,14 @@
+/**
+ * App.css
+ * 
+ * NOTE: This file appears to be leftover boilerplate CSS from the original Vite/React setup template.
+ * Currently, it is NOT imported in `App.jsx` or `main.jsx`, meaning none of these styles are being 
+ * applied to the actual website. 
+ * 
+ * All active global styles are located in `index.css`.
+ * This file can safely be deleted or ignored.
+ */
+
 .counter {
   font-size: 16px;
   padding: 5px 10px;

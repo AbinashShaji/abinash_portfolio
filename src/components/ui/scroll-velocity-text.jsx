@@ -1,3 +1,24 @@
+/**
+ * SCROLL VELOCITY TEXT UTILITY (scroll-velocity-text.jsx)
+ * 
+ * What this file is:
+ * This is an advanced, custom UI component built using Framer Motion.
+ * It's heavily inspired by modern web design libraries (like Aceternity UI or Framer templates).
+ * 
+ * What it's responsible for:
+ * It creates the infinite scrolling "marquee" effect (seen at the bottom of the Skills section).
+ * What makes this special is the "Velocity" part: when the user scrolls the page up or down rapidly, 
+ * the marquee temporarily speeds up or changes direction based on the scroll speed!
+ * 
+ * How it works (High-Level):
+ * 1. useScroll & useVelocity (Framer Motion) track how fast the user is scrolling the page.
+ * 2. It calculates how wide the content is, and clones it enough times to fill the screen seamlessly.
+ * 3. useAnimationFrame runs a loop 60 times a second, constantly moving the content sideways.
+ * 
+ * Where it's used:
+ * Currently used only in `src/components/skills.jsx` to scroll the tech stack logos.
+ */
+
 import React, { useContext, useEffect, useRef, useState } from "react";
 import {
   motion,
@@ -11,10 +32,12 @@ import {
 import { clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 
+// Utility function to cleanly merge Tailwind classes together without conflicts
 export function cn(...inputs) {
   return twMerge(clsx(inputs));
 }
 
+// Math function to loop a number around when it hits a max value (keeps the scroll infinite)
 export const wrap = (min, max, v) => {
   const rangeSize = max - min;
   return ((((v - min) % rangeSize) + rangeSize) % rangeSize) + min;
