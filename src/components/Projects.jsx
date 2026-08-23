@@ -86,7 +86,7 @@ export default function Projects() {
               SELECTED <span className="text-red">PROJECTS</span>
             </h2>
           </div>
-          <a href="#home" className="inline-flex items-center gap-2 font-mono text-sm tracking-widest hover:text-red transition-colors group text-black uppercase pb-1">
+          <a href="https://github.com/AbinashShaji" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 font-mono text-sm tracking-widest hover:text-red transition-colors group text-black uppercase pb-1">
             VIEW ALL PROJECTS <span className="group-hover:translate-x-1 transition-transform inline-block">→</span>
           </a>
         </motion.div>
