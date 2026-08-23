@@ -4,7 +4,7 @@
 
 ## Live Demo
 
-[CONFIRM: Add live deployment link once hosted on Vercel/Render]
+https://abinashshaji-portfolio.vercel.app/
 
 ## Overview
 
