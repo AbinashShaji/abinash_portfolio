@@ -17,7 +17,7 @@ export default function Hero() {
             </div>
 
             {/* Top Overlay Elements */}
-            <div className="relative z-10 px-6 lg:px-16 pt-24 md:pt-40 flex justify-between items-start pointer-events-none">
+            <div className="relative z-10 px-6 lg:px-16 pt-16 md:pt-20 flex justify-between items-start pointer-events-none">
 
                 {/* Top Left Kicker */}
                 <div className="flex flex-col gap-3 md:gap-4 max-w-[200px] md:max-w-none">
@@ -36,28 +36,29 @@ export default function Hero() {
             <div className="relative z-10 px-6 lg:px-16 pb-8 md:pb-12 flex flex-col md:flex-row justify-between items-end md:items-end gap-8 md:gap-0 pointer-events-none">
 
                 {/* Scroll Down Indicator */}
-                <div className="pointer-events-auto">
+                <div className="pointer-events-auto flex items-end">
                     <a href="#about" className="text-cream hover:text-white transition-colors font-mono text-sm tracking-widest flex flex-col items-center gap-1 group">
+                        <div className="w-[1px] h-20 md:h-32 bg-cream/70 mb-2"></div>
                         <span>SCROLL</span>
                         <span>DOWN</span>
-                        <span className="group-hover:translate-y-1 transition-transform mt-1">↓</span>
+                        <span className="text-2xl md:text-3xl font-light group-hover:translate-y-2 transition-transform mt-2">↓</span>
                     </a>
                 </div>
 
                 {/* Socials & Contact */}
-                <div className="flex flex-col sm:flex-row items-end sm:items-center gap-6 md:gap-8 pointer-events-auto ml-auto">
-                    <div className="flex flex-wrap justify-end items-center gap-4 md:gap-6 text-cream">
+                <div className="flex flex-col items-end gap-6 pointer-events-auto ml-auto">
+                    <div className="flex justify-end items-center gap-5 md:gap-6 text-cream mr-1">
                         <a href="https://instagram.com/___abinash.__" target="_blank" rel="noreferrer" className="hover:text-white transition-colors" aria-label="Instagram">
-                            <FaInstagram size={20} />
+                            <FaInstagram size={24} />
                         </a>
                         <a href="https://www.linkedin.com/in/abinashshaji" target="_blank" rel="noreferrer" className="hover:text-white transition-colors" aria-label="LinkedIn">
-                            <FaLinkedin size={20} />
+                            <FaLinkedin size={24} />
                         </a>
                         <a href="https://github.com/AbinashShaji" target="_blank" rel="noreferrer" className="hover:text-white transition-colors" aria-label="GitHub">
-                            <FaGithub size={20} />
+                            <FaGithub size={24} />
                         </a>
                         <a href="mailto:iam.abinashshaji@gmail.com" className="hover:text-white transition-colors" aria-label="Mail">
-                            <Mail size={20} />
+                            <Mail size={24} />
                         </a>
                     </div>
 

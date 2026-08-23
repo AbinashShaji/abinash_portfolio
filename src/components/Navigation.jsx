@@ -51,7 +51,7 @@ export default function Navigation() {
                   key={link.name}
                   href={link.href}
                   onClick={(e) => handleScroll(e, link.href)}
-                  className={`text-cream hover:text-white transition-colors text-sm font-mono tracking-[0.15em] ${link.name === 'HOME' ? 'border-b border-cream pb-1' : ''}`}
+                  className="text-cream hover:text-white transition-all duration-300 text-sm font-mono tracking-[0.15em] border-b border-transparent hover:border-white pb-1"
                 >
                   {link.name}
                 </a>
@@ -86,7 +86,7 @@ export default function Navigation() {
                   key={link.name}
                   href={link.href}
                   onClick={(e) => handleScroll(e, link.href)}
-                  className={`text-cream hover:text-white transition-colors text-sm font-mono tracking-[0.15em] inline-block ${link.name === 'HOME' ? 'border-b border-cream pb-1 self-start' : ''}`}
+                  className="text-cream hover:text-white transition-all duration-300 text-sm font-mono tracking-[0.15em] inline-block self-start border-b border-transparent hover:border-white pb-1"
                 >
                   {link.name}
                 </a>
