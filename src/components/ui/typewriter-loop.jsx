@@ -53,37 +53,37 @@ const TypewriterLoop = ({
 
   useEffect(() => {
     let isMounted = true;
-    
+
     const runAnimation = async () => {
       // Small initial delay before starting the loop
       await new Promise(r => setTimeout(r, 100));
 
       while (isMounted) {
         // 1. Reveal (typewriter effect out)
-        await controls.start({ 
-          width: "auto", 
-          opacity: 1, 
-          transition: { 
-            duration: transition?.duration || 0.8, 
-            ease: transition?.ease || "easeInOut" 
-          } 
+        await controls.start({
+          width: "auto",
+          opacity: 1,
+          transition: {
+            duration: transition?.duration || 0.8,
+            ease: transition?.ease || "easeInOut"
+          }
         });
-        
+
         // 2. Freeze/show for 4 seconds
-        await new Promise(r => setTimeout(r, 4000));
-        
+        await new Promise(r => setTimeout(r, 3000));
+
         if (!isMounted) break;
 
         // 3. Hide in reverse
-        await controls.start({ 
-          width: 0, 
-          opacity: 0, 
-          transition: { 
-            duration: transition?.duration || 0.8, 
-            ease: transition?.ease || "easeInOut" 
-          } 
+        await controls.start({
+          width: 0,
+          opacity: 0,
+          transition: {
+            duration: transition?.duration || 0.8,
+            ease: transition?.ease || "easeInOut"
+          }
         });
-        
+
         if (!isMounted) break;
 
         // Change the word and color seamlessly while hidden
@@ -91,7 +91,7 @@ const TypewriterLoop = ({
         setColorIndex((prev) => (prev + 1) % gradientColors.length);
 
         // 4. Freeze/hide for 1.5 seconds before revealing again
-        await new Promise(r => setTimeout(r, 1500));
+        await new Promise(r => setTimeout(r, 800));
       }
     };
 
