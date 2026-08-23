@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { useForm } from 'react-hook-form';
 import { Mail, MapPin, Link } from 'lucide-react';
 import { FaInstagram, FaLinkedin, FaGithub } from 'react-icons/fa';
-
+import emailjs from '@emailjs/browser';
 export default function Contact() {
   const { register, handleSubmit, formState: { errors }, reset } = useForm();
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -11,22 +11,20 @@ export default function Contact() {
 
   const onSubmit = async (data) => {
     setIsSubmitting(true);
-    const formEndpoint = 'https://formspree.io/f/placeholder';
+    setSubmitStatus(null);
 
     try {
-      const response = await fetch(formEndpoint, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
-      });
+      await emailjs.send(
+        import.meta.env.VITE_EMAILJS_SERVICE_ID,
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+        data,
+        import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+      );
 
-      if (response.ok) {
-        setSubmitStatus('success');
-        reset();
-      } else {
-        setSubmitStatus('error');
-      }
+      setSubmitStatus('success');
+      reset();
     } catch (error) {
+      console.error('EmailJS error:', error);
       setSubmitStatus('error');
     } finally {
       setIsSubmitting(false);
@@ -127,7 +125,7 @@ export default function Contact() {
                   {...register("name", { required: "Name is required" })}
                   className="bg-transparent border-b border-white/20 py-3 text-lg focus:outline-none focus:border-red transition-colors w-full"
                 />
-                {errors.name && <span className="text-red text-sm">{errors.name.message}</span>}
+                {errors.name && <span className="text-red text-xs uppercase tracking-widest font-mono mt-1">{errors.name.message}</span>}
               </div>
 
               <div className="flex flex-col gap-2">
@@ -144,7 +142,7 @@ export default function Contact() {
                   })}
                   className="bg-transparent border-b border-white/20 py-3 text-lg focus:outline-none focus:border-red transition-colors w-full"
                 />
-                {errors.email && <span className="text-red text-sm">{errors.email.message}</span>}
+                {errors.email && <span className="text-red text-xs uppercase tracking-widest font-mono mt-1">{errors.email.message}</span>}
               </div>
 
               <div className="flex flex-col gap-2">
@@ -154,7 +152,7 @@ export default function Contact() {
                   {...register("subject", { required: "Subject is required" })}
                   className="bg-transparent border-b border-white/20 py-3 text-lg focus:outline-none focus:border-red transition-colors w-full"
                 />
-                {errors.subject && <span className="text-red text-sm">{errors.subject.message}</span>}
+                {errors.subject && <span className="text-red text-xs uppercase tracking-widest font-mono mt-1">{errors.subject.message}</span>}
               </div>
 
               <div className="flex flex-col gap-2 mb-4">
@@ -162,25 +160,28 @@ export default function Contact() {
                 <textarea
                   id="message"
                   rows="4"
-                  {...register("message", { required: "Message is required" })}
+                  {...register("message", { 
+                    required: "Message is required",
+                    minLength: { value: 10, message: "Message must be at least 10 characters" }
+                  })}
                   className="bg-transparent border-b border-white/20 py-3 text-lg focus:outline-none focus:border-red transition-colors w-full resize-none"
                 ></textarea>
-                {errors.message && <span className="text-red text-sm">{errors.message.message}</span>}
+                {errors.message && <span className="text-red text-xs uppercase tracking-widest font-mono mt-1">{errors.message.message}</span>}
               </div>
 
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="bg-white text-black font-mono tracking-widest py-4 px-8 uppercase text-sm font-bold hover:bg-red hover:text-white transition-colors self-start disabled:opacity-50 flex items-center gap-2 group"
+                className="bg-white text-black font-mono tracking-widest py-4 px-8 uppercase text-sm font-bold hover:bg-red hover:text-white transition-colors self-start disabled:opacity-50 disabled:hover:bg-white disabled:hover:text-black flex items-center gap-2 group"
               >
-                {isSubmitting ? 'SENDING...' : 'SEND MESSAGE'} <span className="group-hover:translate-x-1 transition-transform">→</span>
+                {isSubmitting ? 'SENDING...' : 'SEND MESSAGE'} {!isSubmitting && <span className="group-hover:translate-x-1 transition-transform">→</span>}
               </button>
 
               {submitStatus === 'success' && (
-                <p className="text-green-500 font-mono text-sm mt-2">Message sent successfully!</p>
+                <p className="text-cream font-mono text-xs md:text-sm uppercase tracking-widest mt-2 border-l-2 border-red pl-4 py-1">Message sent — I'll get back to you soon.</p>
               )}
               {submitStatus === 'error' && (
-                <p className="text-red font-mono text-sm mt-2">Error sending message. Formspree endpoint not configured.</p>
+                <p className="text-red font-mono text-xs md:text-sm uppercase tracking-widest mt-2 border-l-2 border-red pl-4 py-1">Something went wrong — please email me directly instead.</p>
               )}
             </form>
           </motion.div>
