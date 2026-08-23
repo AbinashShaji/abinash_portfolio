@@ -13,7 +13,8 @@
  * Rendered in `App.jsx`, immediately below the Skills section.
  */
 
-import { motion } from 'framer-motion';
+import { motion, useMotionValue, useTransform, animate, useInView } from 'framer-motion';
+import { useEffect, useRef } from 'react';
 
 // Array containing the timeline steps in chronological order.
 const journeySteps = [
@@ -178,8 +179,32 @@ export default function Journey() {
  * - label: The text underneath (e.g. "HOURS CODED")
  */
 function StatBlock({ num, symbol, label }) {
+  // Motion values and transforms for the counter animation
+  const count = useMotionValue(0);
+  const rounded = useTransform(count, Math.round);
+  const ref = useRef(null);
+  
+  // Detect when the component comes into the viewport
+  const isInView = useInView(ref, { once: true, margin: "0px" });
+
+  // Check if the passed number is a valid number (e.g. 500) or a symbol (e.g. '∞')
+  const isNumber = !isNaN(Number(num));
+  const targetNum = isNumber ? Number(num) : 0;
+
+  // Trigger the animation when the component is in view
+  useEffect(() => {
+    if (isInView && isNumber) {
+      // Animate the 'count' motion value from 0 to 'targetNum' over 2 seconds
+      const animation = animate(count, targetNum, { duration: 2, ease: "easeOut" });
+      
+      // Cleanup function to stop animation if component unmounts
+      return () => animation.stop();
+    }
+  }, [count, targetNum, isInView, isNumber]);
+
   return (
     <motion.div
+      ref={ref}
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
@@ -187,7 +212,8 @@ function StatBlock({ num, symbol, label }) {
       className="flex flex-col items-center justify-center py-2"
     >
       <div className="font-display text-5xl md:text-6xl tracking-tighter mb-2 text-black flex items-center">
-        {num}
+        {/* Render the animated number if it's a valid number, otherwise just render the string (e.g. for '∞') */}
+        {isNumber ? <motion.span>{rounded}</motion.span> : <span>{num}</span>}
         <span className="text-red">{symbol}</span>
       </div>
       <div className="font-mono text-xs tracking-widest text-black/60 uppercase">
