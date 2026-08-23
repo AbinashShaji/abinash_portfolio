@@ -54,7 +54,7 @@ const skillCategories = [
   {
     category: "Other",
     icon: Globe,
-    skills: ["Linux", "Nginx", "Vercel", "Render", "Pandas", "NumPy"]
+    skills: ["Linux", "Vercel", "Render", "Pandas", "NumPy"]
   }
 ];
 
@@ -78,15 +78,15 @@ const marqueeItems = [
 export default function Skills() {
   return (
     <section id="skills" className="bg-cream paper-texture py-24 md:py-32 px-4 sm:px-6 lg:px-8 border-t border-black/10 relative overflow-hidden">
-      
+
       {/* Decorative Blocks: These are purely visual elements to enhance the brutalist design */}
       <div className="absolute top-0 right-0 w-32 md:w-64 h-12 md:h-24 bg-red hidden lg:block z-0"></div>
       <div className="absolute bottom-16 left-0 w-8 h-16 bg-[#111] hidden lg:block z-0"></div>
 
       <div className="max-w-[1500px] mx-auto relative z-10">
-        
+
         {/* Section Header */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
@@ -102,7 +102,7 @@ export default function Skills() {
         <div className="border-y border-black/15 bg-cream/50 backdrop-blur-sm">
           {/* 'grid-cols-6' creates 6 equal columns on large screens, meaning all 6 categories sit side-by-side */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 divide-y sm:divide-y-0 sm:divide-x divide-black/15">
-            
+
             {/* Loop through the 'skillCategories' array */}
             {skillCategories.map((group, groupIndex) => (
               <motion.div
@@ -121,7 +121,7 @@ export default function Skills() {
                     {group.category}
                   </h3>
                 </div>
-                
+
                 {/* Secondary Loop: The list of actual skills (e.g. JavaScript, Python) */}
                 <ul className="flex flex-col gap-3 w-full max-w-[140px]">
                   {group.skills.map((skill, skillIndex) => (
@@ -131,7 +131,7 @@ export default function Skills() {
                     </li>
                   ))}
                 </ul>
-                
+
               </motion.div>
             ))}
           </div>

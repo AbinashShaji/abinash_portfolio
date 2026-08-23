@@ -177,9 +177,9 @@ export default function Contact() {
               {/* Input: Name */}
               <div className="flex flex-col gap-2">
                 <label htmlFor="name" className="font-mono text-sm tracking-widest text-white/50 uppercase">Your Name</label>
+                {/* register("name") links this input to the form data. 'required: ...' is the rule. */}
                 <input
                   id="name"
-                  {/* register("name") links this input to the form data. 'required: ...' is the rule. */}
                   {...register("name", { required: "Name is required" })}
                   className="bg-transparent border-b border-white/20 py-3 text-lg focus:outline-none focus:border-red transition-colors w-full"
                 />
@@ -190,12 +190,12 @@ export default function Contact() {
               {/* Input: Email */}
               <div className="flex flex-col gap-2">
                 <label htmlFor="email" className="font-mono text-sm tracking-widest text-white/50 uppercase">Your Email</label>
+                {/* This 'pattern' uses a Regular Expression (Regex) to ensure the text actually looks like an email address */}
                 <input
                   id="email"
                   type="email"
                   {...register("email", {
                     required: "Email is required",
-                    // This 'pattern' uses a Regular Expression (Regex) to ensure the text actually looks like an email address (something@something.com)
                     pattern: {
                       value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
                       message: "Invalid email address"
@@ -220,12 +220,12 @@ export default function Contact() {
               {/* Input: Message (Textarea) */}
               <div className="flex flex-col gap-2 mb-4">
                 <label htmlFor="message" className="font-mono text-sm tracking-widest text-white/50 uppercase">Your Message</label>
+                {/* Ensures the user doesn't just send a 2-letter message like "hi" */}
                 <textarea
                   id="message"
                   rows="4"
                   {...register("message", { 
                     required: "Message is required",
-                    // Ensures the user doesn't just send a 2-letter message like "hi"
                     minLength: { value: 10, message: "Message must be at least 10 characters" }
                   })}
                   className="bg-transparent border-b border-white/20 py-3 text-lg focus:outline-none focus:border-red transition-colors w-full resize-none"

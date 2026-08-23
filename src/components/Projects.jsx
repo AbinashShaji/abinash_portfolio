@@ -24,7 +24,7 @@ const projects = [
     description: "Finzave is a personal finance and financial decision-support system designed to help users understand their financial behaviour, manage income and expenses, analyze spending patterns, track financial goals, and make better financial decisions.",
     stack: "Flask, React, PostgreSQL/SQLite, Pandas, Chart.js",
     link: "#",
-    image: "/images/project/finzave.png"
+    image: "/images/project/finzave.webp"
   },
   {
     num: "02",
@@ -33,7 +33,7 @@ const projects = [
     description: "SmartVest is a financial decision-support system focused on analyzing a user's financial situation and providing useful financial insights and recommendations.",
     stack: "Python, Flask, SQLite, Pandas, Matplotlib",
     link: "https://smartvest.pythonanywhere.com",
-    image: "/images/project/smartvest_1.png"
+    image: "/images/project/smartvest_1.webp"
   },
   {
     num: "03",
@@ -42,7 +42,7 @@ const projects = [
     description: "Triads Future is a premium business website being developed for a technology consulting and growth-oriented company.",
     stack: "Next.js, TypeScript, Tailwind, Framer Motion",
     link: "#",
-    image: "/images/project/traids future1.png"
+    image: "/images/project/traids future1.webp"
   }
 ];
 
@@ -181,14 +181,20 @@ export default function Projects() {
                       {project.stack}
                     </div>
                     
-                    <a 
-                      href={project.link}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="inline-flex items-center gap-2 font-mono text-xs font-bold tracking-widest text-white hover:text-red transition-colors group/link uppercase"
-                    >
-                      VIEW PROJECT <span className="group-hover/link:translate-x-1 transition-transform inline-block">→</span>
-                    </a>
+                    {project.link === "#" ? (
+                      <span className="inline-flex items-center gap-2 font-mono text-xs font-bold tracking-widest text-white/30 uppercase cursor-not-allowed">
+                        COMING SOON <span className="inline-block">—</span>
+                      </span>
+                    ) : (
+                      <a 
+                        href={project.link}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="inline-flex items-center gap-2 font-mono text-xs font-bold tracking-widest text-white hover:text-red transition-colors group/link uppercase"
+                      >
+                        VIEW PROJECT <span className="group-hover/link:translate-x-1 transition-transform inline-block">→</span>
+                      </a>
+                    )}
                   </div>
                   
                 </div>

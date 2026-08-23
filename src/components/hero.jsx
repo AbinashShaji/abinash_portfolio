@@ -30,7 +30,7 @@ export default function Hero() {
             <div className="absolute inset-0 z-0 bg-red">
                 {/* The main background photo */}
                 <img
-                    src="/images/hero/portfolio.png"
+                    src="/images/hero/portfolio.webp"
                     alt="Hero background with Abinash Shaji"
                     className="w-full h-full object-cover object-center"
                 />
