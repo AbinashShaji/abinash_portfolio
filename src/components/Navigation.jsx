@@ -61,17 +61,27 @@ export default function Navigation() {
     return () => window.removeEventListener('scroll', handleScrollEvent);
   }, []); // The empty array [] means "only run this setup once when the page loads"
 
-  // This function runs when a user clicks a navigation link
   const handleScroll = (e, href) => {
-    e.preventDefault(); // Stops the browser from instantly jumping to the link like a normal webpage
-    setIsOpen(false);   // Closes the mobile menu if it was open
+    e.preventDefault(); 
+    setIsOpen(false); 
     
-    // Find the section on the page that matches the link (e.g., id="about")
-    const element = document.querySelector(href);
-    if (element) {
-      // Tell the browser to smoothly scroll down to that section
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
+    // We use setTimeout to allow the mobile menu to start unmounting/closing 
+    // before we calculate the scroll position. This fixes a known bug in React where 
+    // unmounting an clicked element synchronously cancels its navigation events.
+    setTimeout(() => {
+      const element = document.querySelector(href);
+      if (element) {
+        // Calculate offset so the fixed navbar (h-20 or h-24) doesn't cover the top of the section
+        const headerOffset = window.innerWidth >= 768 ? 96 : 80; 
+        const elementPosition = element.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.scrollY - headerOffset;
+  
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth'
+        });
+      }
+    }, 150);
   };
 
   // The actual visual structure of the Navigation bar
@@ -126,20 +136,21 @@ export default function Navigation() {
         {/* 'isOpen &&' means "only render what comes next if isOpen is true" */}
         {isOpen && (
           <motion.div 
+            key="mobile-menu"
             // The menu starts invisible with 0 height, and animates to full visibility and height.
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             className="md:hidden bg-red border-t border-cream/20 overflow-hidden"
           >
-            <div className="px-6 py-6 flex flex-col space-y-6">
+            <div className="px-6 py-4 flex flex-col">
               {/* Loop through the links again for the mobile menu */}
               {links.map((link) => (
                 <a
                   key={link.name}
                   href={link.href}
                   onClick={(e) => handleScroll(e, link.href)} // Clicking a link will also close the menu (handled inside handleScroll)
-                  className="text-cream hover:text-white transition-all duration-300 text-sm font-mono tracking-[0.15em] inline-block self-start border-b border-transparent hover:border-white pb-1"
+                  className="text-cream hover:text-white transition-colors duration-300 text-sm font-mono tracking-[0.15em] block w-full py-4 border-b border-cream/10 last:border-b-0"
                 >
                   {link.name}
                 </a>
