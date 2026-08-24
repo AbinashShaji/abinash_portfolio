@@ -26,6 +26,7 @@ import Skills from './components/skills';
 import Journey from './components/journey';
 import Contact from './components/contact';
 import Footer from './components/footer';
+import CustomCursor from './components/CustomCursor';
 
 // Define the App component function
 function App() {
@@ -53,6 +54,8 @@ function App() {
     // The outermost wrapper div. 'relative' means any absolutely positioned elements inside it will position themselves relative to this div.
     <div className="relative">
       
+      <CustomCursor />
+
       {/* 
         The Navigation bar stays at the top. 
         Because it's placed outside the <main> tag, it's structurally separate from the page content.

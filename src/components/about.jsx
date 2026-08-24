@@ -216,7 +216,7 @@ export default function About() {
                 transition: { staggerChildren: 0.12, delayChildren: 0.2 }
               }
             }}
-            className="font-mono text-base md:text-xl lg:text-3xl uppercase tracking-[0.2em] leading-loose text-cream text-center"
+            className="font-mono text-base md:text-xl lg:text-3xl uppercase tracking-[0.2em] leading-loose text-cream text-center interactable"
           >
             {/* Line 1: Split into an array of words and map to individual animated spans */}
             {"CODE IS NOT JUST LOGIC,".split(" ").map((word, i, arr) => (

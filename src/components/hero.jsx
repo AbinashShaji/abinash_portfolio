@@ -50,7 +50,7 @@ export default function Hero() {
                         <div className="w-12 h-px bg-cream"></div>
                     </div>
                     {/* The main title text */}
-                    <span className="font-mono text-[10px] md:text-sm tracking-[0.2em] text-cream uppercase leading-relaxed md:leading-relaxed">
+                    <span className="font-mono text-[10px] md:text-sm tracking-[0.2em] text-cream uppercase leading-relaxed md:leading-relaxed interactable pointer-events-auto">
                         Creative<br />Developer<br />Problem Solver
                     </span>
                 </div>
