@@ -51,8 +51,8 @@ function App() {
   });
 
   return (
-    // The outermost wrapper div. 'relative' means any absolutely positioned elements inside it will position themselves relative to this div.
-    <div className="relative">
+    // The outermost wrapper applies padding to shift content seamlessly for the new tablet and mobile navigation bars
+    <div className="relative pb-[72px] md:pb-0 md:pl-20 lg:pl-0 transition-all duration-300 overflow-x-hidden">
       
       <CustomCursor />
 

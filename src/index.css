@@ -35,7 +35,7 @@
 @layer base {
   html, body {
     /* @apply lets us use Tailwind classes inside a normal CSS file */
-    @apply bg-cream text-black font-sans scroll-smooth;
+    @apply bg-cream text-black font-sans scroll-smooth lg:scroll-pt-24;
     margin: 0;
     padding: 0;
   }
