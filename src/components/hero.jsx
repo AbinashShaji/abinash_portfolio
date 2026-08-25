@@ -18,6 +18,7 @@
 
 import { Mail } from 'lucide-react';
 import { FaInstagram, FaLinkedin, FaGithub } from 'react-icons/fa';
+import { motion } from 'framer-motion';
 
 export default function Hero() {
     return (
@@ -28,14 +29,29 @@ export default function Hero() {
             {/* BACKGROUND IMAGE & TEXTURE BLOCK */}
             {/* 'absolute inset-0' stretches this div to touch all 4 edges of the screen, acting as a background */}
             <div className="absolute inset-0 z-0 bg-red">
-                {/* The main background photo */}
+                
+                {/* 
+                  The main background photo (Original) 
+                  Visible ONLY on Desktop (lg and above)
+                */}
                 <img
                     src="/images/hero/portfolio.webp"
                     alt="Hero background with Abinash Shaji"
-                    className="w-full h-full object-cover object-center"
+                    className="absolute inset-0 w-full h-full object-cover object-center hidden lg:block"
                 />
+
+                {/* 
+                  The new background photo
+                  Visible ONLY on Mobile and Tablet (hidden on lg and above)
+                */}
+                <img
+                    src="/images/hero/portfolio new.webp"
+                    alt="Hero background with Abinash Shaji"
+                    className="absolute inset-0 w-full h-full object-cover object-center lg:hidden"
+                />
+
                 {/* The paper texture overlay (uses a global CSS class 'paper-texture' defined in index.css) */}
-                <div className="absolute inset-0 paper-texture pointer-events-none opacity-100 mix-blend-multiply"></div>
+                <div className="absolute inset-0 paper-texture pointer-events-none opacity-100 mix-blend-multiply z-10"></div>
             </div>
 
             {/* TOP OVERLAY ELEMENTS (The text in the top-left corner) */}
