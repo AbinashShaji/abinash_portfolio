@@ -20,28 +20,37 @@ import { Mail } from 'lucide-react';
 import { FaInstagram, FaLinkedin, FaGithub } from 'react-icons/fa';
 import { motion } from 'framer-motion';
 
+// ==========================================
+// TYPEWRITER ANIMATION COMPONENT
+// ==========================================
+// Think of this as a mini-machine that takes a sentence and types it out 
+// letter by letter on the screen, like an old typewriter.
 const TypewriterText = ({ text, delay = 0 }) => {
     return (
+        // The outer wrapper that controls the overall timing
         <motion.span
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: false, amount: 0.1 }}
+            initial="hidden" // Start completely invisible
+            whileInView="visible" // Start the animation only when the user scrolls to it
+            viewport={{ once: false, amount: 0.1 }} // 'once: false' means it will reset and replay EVERY time you scroll away and come back!
             variants={{
-                hidden: { opacity: 1 },
+                hidden: { opacity: 1 }, 
                 visible: {
                     opacity: 1,
+                    // 'staggerChildren' is the magic: it tells each letter inside to wait a tiny 0.05 seconds after the previous one before appearing!
                     transition: { staggerChildren: 0.05, delayChildren: delay },
                 },
             }}
             style={{ display: "inline-block" }}
         >
+            {/* We chop the word into individual letters and animate them one by one */}
             {Array.from(text).map((char, index) => (
                 <motion.span 
                     key={index} 
                     variants={{
-                        hidden: { opacity: 0 },
-                        visible: { opacity: 1 }
+                        hidden: { opacity: 0 }, // Letter starts invisible
+                        visible: { opacity: 1 } // Letter becomes visible
                     }}
+                    // 'whiteSpace: "pre"' ensures that spaces between words don't get accidentally deleted by the browser
                     style={{ display: "inline-block", whiteSpace: "pre" }}
                 >
                     {char}
@@ -118,24 +127,28 @@ export default function Hero() {
             {/* BOTTOM OVERLAY ELEMENTS (Scroll indicator and social links) */}
             <div className="relative z-10 px-6 lg:px-16 pb-8 md:pb-12 flex flex-col md:flex-row justify-between items-end md:items-end gap-8 md:gap-0 pointer-events-none">
 
-                {/* Scroll Down Indicator */}
-                {/* 'pointer-events-auto' allows this specific part to be clickable, even though the parent wrapper ignores clicks */}
+                {/* ========================================== */}
+                {/* SCROLL DOWN INDICATOR ANIMATION            */}
+                {/* ========================================== */}
+                {/* 'pointer-events-auto' makes sure you can actually click this button */}
                 <div className="pointer-events-auto flex items-end">
-                    {/* Clicking this scrolls down to the 'about' section */}
+                    
+                    {/* The entire scroll down block is wrapped in an animated anchor tag */}
                     <motion.a 
                         href="#about" 
                         className="text-cream hover:text-white transition-colors font-mono text-sm tracking-widest flex flex-col items-center gap-1 group"
                         initial="hidden"
-                        whileInView="visible"
-                        viewport={{ once: false, amount: 0.1 }}
+                        whileInView="visible" 
+                        viewport={{ once: false, amount: 0.1 }} // Replays every time you scroll to the Hero section
                         variants={{
                             hidden: {},
                             visible: {
+                                // This staggers the animations so the Line appears first, then "SCROLL", then "DOWN", then the Arrow
                                 transition: { staggerChildren: 0.15, delayChildren: 0.2 }
                             }
                         }}
                     >
-                        {/* A tall, thin vertical line pointing down that grows */}
+                        {/* 1. The tall, thin vertical line. It grows from top to bottom (scaleY: 0 to 1) */}
                         <motion.div 
                             className="w-[1px] h-20 md:h-32 bg-cream/70 mb-2 origin-top"
                             variants={{
@@ -144,6 +157,7 @@ export default function Hero() {
                             }}
                         ></motion.div>
                         
+                        {/* 2. The word "SCROLL" fades in and slides down slightly (y: -10 to 0) */}
                         <motion.span
                             variants={{
                                 hidden: { opacity: 0, y: -10 },
@@ -153,6 +167,7 @@ export default function Hero() {
                             SCROLL
                         </motion.span>
                         
+                        {/* 3. The word "DOWN" fades in right after */}
                         <motion.span
                             variants={{
                                 hidden: { opacity: 0, y: -10 },
@@ -162,7 +177,7 @@ export default function Hero() {
                             DOWN
                         </motion.span>
                         
-                        {/* The arrow container handles the entrance animation dropping in */}
+                        {/* 4. The arrow container. It drops in playfully at the very end. */}
                         <motion.div 
                             className="mt-2"
                             variants={{
@@ -170,11 +185,11 @@ export default function Hero() {
                                 visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "backOut" } }
                             }}
                         >
-                            {/* The arrow itself loops infinitely, bouncing down and enlarging slightly */}
+                            {/* Inside the container, the arrow itself runs a separate, infinite animation loop (bouncing and enlarging) */}
                             <motion.span 
                                 className="text-2xl md:text-3xl font-light block"
-                                animate={{ y: [0, 8, 0], scale: [1, 1.15, 1] }}
-                                transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+                                animate={{ y: [0, 8, 0], scale: [1, 1.15, 1] }} // Slides down 8 pixels and grows 15% larger, then goes back
+                                transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }} // 'Infinity' makes it loop forever!
                             >
                                 ↓
                             </motion.span>
@@ -182,21 +197,25 @@ export default function Hero() {
                     </motion.a>
                 </div>
 
-                {/* Social Media Links & Contact Button */}
+                {/* ========================================== */}
+                {/* SOCIAL MEDIA & CONTACT BUTTON ANIMATION    */}
+                {/* ========================================== */}
                 <motion.div 
                     className="flex flex-col items-end gap-6 pointer-events-auto ml-auto"
                     initial="hidden"
                     whileInView="visible"
-                    viewport={{ once: false, amount: 0.1 }}
+                    viewport={{ once: false, amount: 0.1 }} // Replays every time you scroll to the Hero section
                     variants={{
                         hidden: {},
                         visible: {
+                            // Staggers the reveal so icons slide in one after the other, followed by the big button
                             transition: { staggerChildren: 0.1, delayChildren: 0.3 }
                         }
                     }}
                 >
-                    {/* The row of social icons (each slides in from the right) */}
+                    {/* The row of social icons */}
                     <div className="flex justify-end items-center gap-5 md:gap-6 text-cream mr-1">
+                        {/* Each icon starts slightly to the right (x: 15) and invisible, then slides to its normal spot (x: 0) */}
                         <motion.a 
                             variants={{ hidden: { opacity: 0, x: 15 }, visible: { opacity: 1, x: 0, transition: { duration: 0.4, ease: "easeOut" } } }} 
                             href="https://instagram.com/___abinash.__" target="_blank" rel="noreferrer" className="hover:text-white transition-colors" aria-label="Instagram"
@@ -223,14 +242,15 @@ export default function Hero() {
                         </motion.a>
                     </div>
 
-                    {/* The big Contact Me button (slides up) */}
+                    {/* The big Contact Me button */}
+                    {/* Starts slightly pushed down (y: 15) and pops up into place */}
                     <motion.a 
                         variants={{ hidden: { opacity: 0, y: 15 }, visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "backOut" } } }} 
                         href="#contact" 
                         className="bg-[#111] text-cream px-6 py-4 font-mono text-sm tracking-widest hover:bg-black transition-colors flex items-center justify-center gap-2 group whitespace-nowrap border border-transparent hover:border-white/20"
                     >
                         CONTACT ME 
-                        {/* The arrow slides to the right when you hover over the button */}
+                        {/* The arrow symbol inside the button. The CSS 'group-hover:translate-x-1' makes it slide right when hovered! */}
                         <span className="group-hover:translate-x-1 transition-transform">→</span>
                     </motion.a>
                 </motion.div>
