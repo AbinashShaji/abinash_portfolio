@@ -80,8 +80,10 @@ const ImageMagnifier = ({ src, alt }) => {
           transformOrigin: `${position.x} ${position.y}`
         }}
         onError={(e) => {
-          e.target.onerror = null;
-          e.target.src = `https://placehold.co/800x600/222/EFE6DA?text=${alt.replace(/\s+/g, '+')}`;
+          const fallback = `https://placehold.co/800x600/222/EFE6DA?text=${alt.replace(/\s+/g, '+')}`;
+          if (e.target.src !== fallback) {
+            e.target.src = fallback;
+          }
         }}
       />
     </div>
@@ -155,8 +157,10 @@ export default function Projects() {
                        
                        // A clever fallback: if the real image URL fails to load, it generates a placeholder image on the fly!
                        onError={(e) => {
-                         e.target.onerror = null;
-                         e.target.src = `https://placehold.co/400x800/222/EFE6DA?text=${project.title.replace(/\s+/g, '+')}`;
+                         const fallback = `https://placehold.co/400x800/222/EFE6DA?text=${project.title.replace(/\s+/g, '+')}`;
+                         if (e.target.src !== fallback) {
+                           e.target.src = fallback;
+                         }
                        }}
                      />
                   </div>
